@@ -13,7 +13,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/contact_management', {
 });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error:'));
-db.once('open');
+db.once('open',() => {
+    console.log('Connected to MongoDB')});
 
 app.use("/api",cors({
     origin: "*", // Allow all origins
@@ -21,4 +22,6 @@ app.use("/api",cors({
   }), route);
 // Start server
 const PORT = 5000;
-app.listen(PORT);
+app.listen(PORT, () => {
+  console.log(`Server is running`);
+});
